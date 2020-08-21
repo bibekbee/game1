@@ -230,7 +230,7 @@
         spinnerContainer.style.display = 'block';
         btn.style.display = 'none';
         // run the setEndgame() function after a random number of seconds between 5 and 10
-        setTimeout(setEndgame, random(2000, 6000));
+        setTimeout(setEndgame, random(2000, 4000));
         pick = Math.floor(Math.random() * 5);
        
         
@@ -292,7 +292,7 @@
 
             if (isOver) {
                 sub.removeEventListener('click', keyHandler);
-                setTimeout(reset, 2000);
+                setTimeout(reset, 4000);
             }
         };
     }
