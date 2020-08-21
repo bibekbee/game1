@@ -146,7 +146,7 @@
                 
             </div>
         </div>
-        <div class="pp"><img class="result" width="300" height="300" ></div>
+        <div class="pp"><img class="result" width="500" height="300" ></div>
     </section>
 
     
@@ -218,12 +218,14 @@
         // run the setEndgame() function after a random number of seconds between 5 and 10
         setTimeout(setEndgame, random(2000, 6000));
         pick = Math.floor(Math.random() * 5);
+        imgNo = Math.floor(Math.random() * 3);
         
     }
 
      //question making area 
         var make = ['You are !!!', 'Answer me ???', 'We know **', 'speak the truth :[', 'Hey, you !!!']
         var pick;
+        var imgNo
         
 
 
@@ -242,11 +244,11 @@
             console.log(e.key);
 
             if (e.key === "a") {
-                result.src = 'captured.png';
+                result.src = 'cap' + imgNo + '.jpg';
                 result.style.align = 'left';
                 isOver = true;
             } else if (e.key === "l") {
-                result.src = 'captured.png';
+                result.src = 'cap' + imgNo + '.jpg';
                 result.style.align = 'right';
                 isOver = true;
             }
