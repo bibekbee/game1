@@ -38,7 +38,7 @@
         }
 
         .topbar p,
-        button {
+        .btn {
             margin: 0;
             font-size: 1.5rem;
             border: 5px solid;
@@ -74,24 +74,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between ;
         }
 
         /* Button-specific styling */
 
-        button {
+        .btn {
             border: 0;
             padding: 12.75px 20px;
             background-color: #ddd;
             cursor: pointer;
         }
 
-        button:hover,
-        button:focus {
+        .btn:hover,
+        .btn:focus {
             background-color: #eee;
         }
 
-        button:active {
+        .btn:active {
             background-color: #fff;
         }
 
@@ -117,10 +117,16 @@
             margin: 0;
             font-size: 10rem;
         }
-        .pp { margin: 0;
+        .pp {  margin: 0;
             display: flex;
             align-items: center;
-            justify-content: center;}
+            justify-content: center;
+
+        }
+
+        .sub{ display: flex;
+        margin: 0;
+        justify-content: space-between ; }
 
     </style>
 </head>
@@ -141,10 +147,10 @@
             
           <div class="p2"> <p>Player 2 </p><input class="yy" type="text"></div>
             <div class="middlebar">
-                <button>Start game</button>
+                <button class= "btn">Start game</button>
                 <p class="land"></p>
                 <p class="speak">Press A for truth and L for lie</p>
-                
+                <button class="sub">Submit</button>
             </div>
         </div>
         <div class="pp"><img class="result" width="500" height="300" ></div>
@@ -161,10 +167,13 @@
     let rAF;
 
     // Store references to the start button and the result paragraph
-    const btn = document.querySelector('button');
+    const btn = document.querySelector('.btn');
+    const sub = document.querySelector('.sub');
     const result = document.querySelector('.result');
     const question = document.querySelector('.land');
     const speak = document.querySelector('.speak');
+    const tt = document.querySelector('.tt');
+    const yy = document.querySelector('.yy');
 
     // function to generate random number
     function random(min, max) {
@@ -197,6 +206,7 @@
     spinnerContainer.style.display = 'none';
     question.style.display = 'none';
     speak.style.dispaly = 'none';
+    sub.style.display = "none";
 
     // Reset the game to its initial state on restart
     function reset() {
@@ -204,6 +214,7 @@
         result.src = '';
         result.style.display = 'none';
         question.style.display = 'none';
+        sub.style.display = "none";
         
        
     }
@@ -221,7 +232,7 @@
         // run the setEndgame() function after a random number of seconds between 5 and 10
         setTimeout(setEndgame, random(2000, 6000));
         pick = Math.floor(Math.random() * 5);
-        imgNo = Math.floor(Math.random() * 4);
+       
         
         
     }
@@ -229,7 +240,9 @@
      //question making area 
         var make = ['You are !!!', 'Answer me ???', 'We know **', 'speak the truth :[', 'Hey, you !!!']
         var pick;
-        var imgNo;
+        
+
+     
         
 
 
@@ -241,30 +254,35 @@
         question.style.display = 'block';
         question.textContent = make[pick];
         speak.style.display = "none";
+        sub.style.display = "block";
 
-        document.addEventListener('keydown', keyHandler);
+        sub.addEventListener('click', keyHandler);
 
-        function keyHandler(e) {
+        function keyHandler() {
 
-            
-            let isOver = false;
-            console.log(e.key);
+            let take = tt.value + yy.value;
+             let isOver = false;
+            console.log(take);
 
-            if (e.key === "a" ) {
+            if (take === "aa") {
+                result.src = 'cap0.jpg';
+                console.log("waht!!");
+                
+                isOver = true;
+            } else if (take === "al") {
                 result.src = 'cap1.jpg';
                 
                 isOver = true;
-            } else if (e.key === "l" && "a") {
+            }  else if (take === "la") {
                 result.src = 'cap2.jpg';
-                
+
                 isOver = true;
-            }  else if (e.key === "a" && "l") {
+            } else if (take === "ll") {
                 result.src = 'cap3.jpg';
 
                 isOver = true;
-            } else if (e.key === "l" && "l") {
-                result.src = 'cap4.jpg';
-
+            }
+            else {
                 isOver = true;
             }
 
@@ -273,7 +291,7 @@
 
 
             if (isOver) {
-                document.removeEventListener('keydown', keyHandler);
+                sub.removeEventListener('click', keyHandler);
                 setTimeout(reset, 2000);
             }
         };
