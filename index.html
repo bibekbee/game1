@@ -142,7 +142,7 @@
             <div class="middlebar">
                 <button>Start game</button>
                 <p class="land"></p>
-                <p>Press A for truth and L for lie</p>
+                <p class="speak">Press A for truth and L for lie</p>
                    
               
                 
@@ -165,6 +165,7 @@
     const btn = document.querySelector('button');
     const result = document.querySelector('.result');
     const question = document.querySelector('.land');
+    const speak = document.querySelector('.speak');    
 
     // function to generate random number
     function random(min, max) {
@@ -196,6 +197,7 @@
     result.style.display = 'none';
     spinnerContainer.style.display = 'none';
     question.style.display = 'none';
+    speak.style.dispaly = 'none';    
 
     // Reset the game to its initial state on restart
     function reset() {
@@ -238,6 +240,7 @@
         result.style.display = 'block';
         question.style.display = 'block';
         question.textContent = make[pick];
+        const speak = document.querySelector('.speak');
 
         document.addEventListener('keydown', keyHandler);
 
