@@ -50,6 +50,9 @@
         .p2 {
             align-self: flex-start;
         }
+        .tt,.yy { align-self: flex-start;}
+        .topbar .tt { order: 0; margin-top:5px;}
+        .topbar .yy { order: 2; margin-top:5px;} 
 
         .topbar .p1 {
             order: 0;
@@ -114,13 +117,6 @@
             margin: 0;
             font-size: 10rem;
         }
-        
-        .pp {
-             margin: 0;
-             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
     </style>
 </head>
@@ -137,14 +133,13 @@
 
     <section class="ui">
         <div class="topbar">
-            <p class="p1">Player 1</p>
-            <p class="p2">Player 2</p>
+            <div class="p1"><p>Player 1</p><input class="tt" type="text"></div>
+            
+          <div class="p2"> <p>Player 2 </p><input class="yy" type="text"></div>
             <div class="middlebar">
                 <button>Start game</button>
                 <p class="land"></p>
                 <p class="speak">Press A for truth and L for lie</p>
-                   
-              
                 
             </div>
         </div>
@@ -165,7 +160,7 @@
     const btn = document.querySelector('button');
     const result = document.querySelector('.result');
     const question = document.querySelector('.land');
-    const speak = document.querySelector('.speak');    
+    const speak = document.querySelector('.speak');
 
     // function to generate random number
     function random(min, max) {
@@ -197,7 +192,7 @@
     result.style.display = 'none';
     spinnerContainer.style.display = 'none';
     question.style.display = 'none';
-    speak.style.dispaly = 'none';    
+    speak.style.dispaly = 'none';
 
     // Reset the game to its initial state on restart
     function reset() {
@@ -220,9 +215,10 @@
         spinnerContainer.style.display = 'block';
         btn.style.display = 'none';
         // run the setEndgame() function after a random number of seconds between 5 and 10
-        setTimeout(setEndgame, random(2000, 4000));
+        setTimeout(setEndgame, random(2000, 6000));
         pick = Math.floor(Math.random() * 5);
-        imgNo = Math.floor(Math.random() * 3);
+        imgNo = Math.floor(Math.random() * 4);
+        
         
     }
 
@@ -240,28 +236,41 @@
         result.style.display = 'block';
         question.style.display = 'block';
         question.textContent = make[pick];
-        speak.style.dispaly = 'none';
-        
+        speak.style.display = "none";
 
         document.addEventListener('keydown', keyHandler);
 
         function keyHandler(e) {
+
+            
             let isOver = false;
             console.log(e.key);
 
-            if (e.key === "a") {
-                result.src = 'cap' + imgNo + '.jpg';
-                result.style.align = 'left';
+            if (e.key === "a" ) {
+                result.src = 'cap1.jpg';
+                
                 isOver = true;
-            } else if (e.key === "l") {
-                result.src = 'cap' + imgNo + '.jpg';
-                result.style.align = 'right';
+            } else if (e.key === "l" && "a") {
+                result.src = 'cap2.jpg';
+                
+                isOver = true;
+            }  else if (e.key === "a" && "l") {
+                result.src = 'cap3.jpg';
+
+                isOver = true;
+            } else if (e.key === "l" && "l") {
+                result.src = 'cap4.jpg';
+
                 isOver = true;
             }
 
+
+        
+
+
             if (isOver) {
                 document.removeEventListener('keydown', keyHandler);
-                setTimeout(reset, 4000);
+                setTimeout(reset, 2000);
             }
         };
     }
